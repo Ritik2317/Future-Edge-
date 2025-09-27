@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
         >
         <Header/>
         <main>{children}</main>
-        <footer className="bg-gray-950 text-white py-4 fixed bottom-0 w-full">
+        <footer className="bg-gray-950 text-white py-4 bottom-0 w-full">
           <div className="container mx-auto text-center">
             <p className="text-sm md:text-base">
               Efforts by <span className="font-bold">Pushp Jain</span>, <span className="font-bold">Riteek Yadav</span> and <span className="font-bold">Shubham Kumar.</span>
