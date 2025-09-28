@@ -11,8 +11,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { checkUser } from '@/lib/checkUser'
 
-function Header() {
+async function Header() {
+  await checkUser();
   return (
     <header className="w-full border-b shadow-sm">
       <nav className="flex items-center justify-between px-6 py-3">
