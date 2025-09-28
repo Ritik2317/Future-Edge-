@@ -35,15 +35,25 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
         >
-        <Header/>
-        <main>{children}</main>
-        <footer className="bg-gray-950 text-white py-4 bottom-0 w-full">
-          <div className="container mx-auto text-center">
-            <p className="text-sm md:text-base">
-              Efforts by <span className="font-bold">Pushp Jain</span>, <span className="font-bold">Riteek Yadav</span> and <span className="font-bold">Shubham Kumar.</span>
-            </p>
-          </div>
-        </footer>
+        <div className="flex flex-col min-h-screen">
+          {/* Header */}
+          <Header />
+
+          {/* Main content */}
+          <main className="flex-1">{children}</main>
+
+          {/* Footer */}
+          <footer className="bg-gray-950 text-white py-4">
+            <div className="container mx-auto text-center">
+              <p className="text-sm md:text-base">
+                Efforts by{" "}
+                <span className="font-bold">Pushp Jain</span>,{" "}
+                <span className="font-bold">Riteek Yadav</span> and{" "}
+                <span className="font-bold">Shubham Kumar</span>.
+              </p>
+            </div>
+          </footer>
+        </div>
         </ThemeProvider>
       </body>
     </html>

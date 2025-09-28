@@ -1,9 +1,9 @@
 import React from 'react'
 
-function page() {
+function OnboardingPage() {
   return (
-    <div>page</div>
+    <div>OnboardingPage</div>
   )
 }
 
-export default page
+export default OnboardingPage
