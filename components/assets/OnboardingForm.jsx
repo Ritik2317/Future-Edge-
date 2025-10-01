@@ -1,7 +1,7 @@
 "use client";
 import { onboardingSchema } from '@/app/lib/schema';
 import { useRouter } from 'next/navigation'; 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -24,17 +24,42 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';
+import useFetch from '@/hooks/use-fetch';
+import { updateUser } from '@/actions/user';
+import { toast } from 'sonner';
+import { Loader } from 'lucide-react';
 function OnboardingForm({ industries }) {
   const [selectedIndustry, setSelectedIndustry] = useState(null);
   const router = useRouter();
+
+  const {
+    loading: updateLoading,
+    fn:updateUserFn,
+    data: updateResult,
+  } = useFetch(updateUser);
 
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm({
     resolver: zodResolver(onboardingSchema),
   });
   const watchIndustry = watch("industry");
   const onSubmit = async(values)=>{
-    console.log(values);
+    try{
+      const formattedIndustry = `${values.industry} - ${values.subIndustry.toLowerCase().replace(/ /g,"-")}`;
+      await updateUserFn({
+        ...values,
+        industry: formattedIndustry,
+      })
+    }catch(error){
+      console.log("Onboarding error:", error.message);
+    }
   };
+  useEffect(()=>{
+    if(updateResult?.success && !updateLoading){
+      toast.success("Profile generated successfully");
+      router.push("/dashboard");
+      router.refresh();
+    }
+  },[updateResult,updateLoading]);
   return (
     <div className="flex justify-center items-center mt-10">
       <Card className="w-full max-w-md shadow-lg rounded-2xl">
@@ -152,8 +177,15 @@ function OnboardingForm({ industries }) {
                 </p>
               )}
             </div>
-            <Button type="submit" className="w-full hover:cursor-pointer">
-              Complete Profile
+            <Button type="submit" className="w-full hover:cursor-pointer" disabled={updateLoading}>
+              {updateLoading ? (
+                <>
+                  <Loader className='mr-2 h-4 w-4 animate-spin'/>
+                  Saving
+                </>
+              ):
+                ("Complete Profile")
+              }
             </Button>
           </form>
         </CardContent>

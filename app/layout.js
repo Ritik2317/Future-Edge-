@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/assets/ThemeProvider";
 import Header from "@/components/assets/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,7 +42,7 @@ export default function RootLayout({ children }) {
 
           {/* Main content */}
           <main className="flex-1">{children}</main>
-
+          <Toaster/>
           {/* Footer */}
           <footer className="bg-gray-950 text-white py-4">
             <div className="container mx-auto text-center">
