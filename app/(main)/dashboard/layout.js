@@ -5,9 +5,9 @@ import { BarLoader } from "react-spinners";
 
 function Layout({ children }) {
   return (
-    <div className="px-5">
+    <div className="px-5 m-5">
       <div className="flex items-center justify-between mb-5">
-        <h1 className="text-5xl font-extrabold bg-gradient-to-r from-gray-100 via-gray-200 to-gray-400 bg-clip-text text-transparent">
+        <h1 className="text-5xl font-extrabold leading-tight bg-gradient-to-r from-gray-100 via-gray-200 to-gray-400 bg-clip-text text-transparent">
           Industry Insights
         </h1>
       </div>
